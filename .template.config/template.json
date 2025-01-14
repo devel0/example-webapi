@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json.schemastore.org/template",
+    "author": "Lorenzo Delana",
+    "classifications": [
+        "AspNet",        
+        "Serilog",
+        "Lifetime",
+        "Service",
+        "Swagger",
+        "Controller"        
+    ],
+    "identity": "SearchAThingTemplates.WebApi",
+    "name": "Sample webapi",
+    "shortName": "webapi-skel",
+    "sourceName": "ExampleWebApi",
+    "tags": {
+        "language": "C#",
+        "type": "project"
+    },
+    "preferNameDirectory": true,
+    "symbols": {
+        "namespace": {
+            "type": "parameter",
+            "defaultValue": "ExampleWebApi",
+            "replaces": "ExampleWebApi"
+        },    
+        "emptysecretsid": {
+            "type": "generated",
+            "generator": "constant",
+            "parameters": {
+                "value": ""
+            },
+            "replaces": "<UserSecretsId>7f2db397-8b60-4b4f-9f83-2b6936d632e9</UserSecretsId>"
+        }
+    },
+    "sources": [
+        {
+            "modifiers": [
+                {
+                    "exclude": [
+                        "**/[Bb]in/**",
+                        "**/[Oo]bj/**",
+                        ".template.config/**/*",
+                        "**/*.filelist",
+                        "**/*.user",
+                        "**/*.lock.json",
+                        "**/node_modules/**",
+                        "**/.git/**",
+                        "**/website-media/**"
+                    ]
+                }
+            ]
+        }
+    ]
+}

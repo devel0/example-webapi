@@ -1,6 +1,7 @@
 # example web api
 
 - [features](#features)
+- [quickstart](#quickstart)
 - [seealso](#seealso)
 - [how this project was built](#how-this-project-was-built)
 
@@ -11,6 +12,25 @@ same as `dotnew new webapi` plus:
 - swagger ( dark theme ) with xml generated doc from code and custom document filter to add more custom types
 - injectable services into controllers
 - lifetime with cts to deal with graceful shutdown
+
+## quickstart
+
+- install repo as template
+
+```sh
+git clone https://github.com/devel0/example-webapi.git
+cd example-webapi
+dotnet new install .
+cd ..
+```
+
+- create project from template
+
+```sh
+dotnet new webapi-skel -n project-folder --namespace My.Some
+cd project-folder
+dotnet run
+```
 
 ## seealso
 
