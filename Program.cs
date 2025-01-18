@@ -11,6 +11,7 @@ builder.Services.AddResponseCompression(options => { options.EnableForHttps = tr
 builder.Services.AddSerilog(config => { config.ReadFrom.Configuration(builder.Configuration); });
 
 // add custom services
+builder.Services.AddScoped<IGracefulShutdownService, GracefulShutdownService>();
 builder.Services.AddScoped<ISampleService, SampleService>();
 
 // add controllers
@@ -30,9 +31,6 @@ var app = builder.Build();
 
 // use response compression
 app.UseResponseCompression();
-
-// connects host application lifetime started, stopping, stopped magaging cancellation of given token source
-app.SetupLifetime(cts);
 
 // custommize exception handling
 app.SetupException();
@@ -54,12 +52,26 @@ app.MapControllers();
 // start app
 await app.StartAsync(cts.Token);
 
+app.Logger.LogInformation("Application started");
+
 app.Logger.LogInformation($"Environment: {app.Environment.EnvironmentName}");
 
 app.Logger.LogInformation($"Listening on {string.Join(" ", app.Urls.Select(w => w.ToString()))}");
 
-// wait for app graceful shutdown
 await app.WaitForShutdownAsync(cts.Token);
 
+var gracefulShutdown = app.Services.GetRequiredService<IGracefulShutdownService>();
+
 // app run
-await app.RunAsync(cts.Token);
+try
+{
+    await app.RunAsync(cts.Token);
+}
+catch (OperationCanceledException)
+{
+    app.Logger.LogInformation("Application stopping");
+}
+
+await gracefulShutdown.HandleGracefulShutdown();
+
+app.Logger.LogInformation("Application stopped");

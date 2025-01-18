@@ -2,6 +2,7 @@
 
 - [features](#features)
 - [quickstart](#quickstart)
+- [graceful shutdown](#graceful-shutdown)
 - [seealso](#seealso)
 - [how this project was built](#how-this-project-was-built)
 
@@ -30,6 +31,24 @@ cd ..
 dotnet new webapi-skel -n project-folder --namespace My.Some
 cd project-folder
 dotnet run
+```
+
+## graceful shutdown
+
+```sh
+devel0@mini:~/opensource/example-webapi$ dn run
+[19:12:49 INF] Backend application started
+[19:12:49 INF] Application started
+[19:12:49 INF] Environment: Production
+[19:12:49 INF] Listening on http://localhost:5000
+^C
+[19:12:50 INF] Backend application stopping
+[19:12:50 INF] Backend application stopped
+[19:12:50 INF] Application stopping
+[19:12:50 INF] Graceful shutdown in progress
+[19:12:50 INF] Fake 3 sec wait
+[19:12:53 INF] Graceful shutdown completed
+[19:12:53 INF] Application stopped
 ```
 
 ## seealso
