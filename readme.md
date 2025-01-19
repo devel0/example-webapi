@@ -3,6 +3,7 @@
 - [features](#features)
 - [quickstart](#quickstart)
 - [graceful shutdown](#graceful-shutdown)
+- [json camelcase](#json-camelcase)
 - [seealso](#seealso)
 - [how this project was built](#how-this-project-was-built)
 
@@ -13,6 +14,7 @@ same as `dotnew new webapi` plus:
 - swagger ( dark theme ) with xml generated doc from code and custom document filter to add more custom types
 - injectable services into controllers
 - lifetime with cts to deal with graceful shutdown
+- code casing extensions and util service for json camelcase configuration
 
 ## quickstart
 
@@ -49,6 +51,14 @@ devel0@mini:~/opensource/example-webapi$ dn run
 [19:12:50 INF] Fake 3 sec wait
 [19:12:53 INF] Graceful shutdown completed
 [19:12:53 INF] Application stopped
+```
+
+## json camelcase
+
+injecting `IUtilService` there is a ready to use `JavaSerializerSettings` method to pass a configured json options object:
+
+```csharp
+var obj = JsonSerializer.Deserialize<Nfo>(res, util.JavaSerializerSettings());
 ```
 
 ## seealso

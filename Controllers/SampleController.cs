@@ -14,6 +14,7 @@ public class SampleController : ControllerBase
         CancellationToken cancellationToken
     )
     {
+        this.logger = logger;
         this.sample = sample;
         this.cancellationToken = cancellationToken;
     }

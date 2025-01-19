@@ -1,4 +1,3 @@
-
 namespace ExampleWebApi;
 
 public class SampleService : ISampleService

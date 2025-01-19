@@ -3,6 +3,9 @@ global using static System.Net.Mime.MediaTypeNames;
 global using System.Diagnostics;
 global using System.IO.Compression;
 global using System.Reflection;
+global using System.Text.Json;
+global using System.Text.Json.Serialization;
+global using System.Text.Json.Serialization.Metadata;
 
 // microsoft
 global using ILogger = Microsoft.Extensions.Logging.ILogger;

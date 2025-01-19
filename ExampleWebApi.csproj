@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="CodeCasing" Version="4.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="$(MSCoreVersion)" />
     <PackageReference Include="Serilog.Extensions.Hosting" Version="$(MSCoreVersion)" />
     <PackageReference Include="Serilog.Settings.Configuration" Version="$(MSCoreVersion)" />
