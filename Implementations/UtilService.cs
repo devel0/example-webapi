@@ -1,4 +1,4 @@
-namespace IotGatewayApi;
+namespace ExampleWebApi;
 
 public class UtilService : IUtilService
 {
