@@ -3,6 +3,18 @@ namespace ExampleWebApi;
 public class UtilService : IUtilService
 {
 
+    readonly ILogger logger;
+    readonly IConfiguration configuration;
+
+    public UtilService(
+        ILogger<UtilService> logger,
+        IConfiguration configuration
+    )
+    {
+        this.logger = logger;
+        this.configuration = configuration;
+    }
+
     public JsonSerializerOptions ConfigureJsonSerializerOptions(JsonSerializerOptions options)
     {
         options.Converters.Add(new JsonStringEnumConverter());
@@ -48,7 +60,7 @@ public class UtilService : IUtilService
                     // }
                 }
             }
-        };        
+        };
 
         return options;
     }
@@ -60,6 +72,41 @@ public class UtilService : IUtilService
         ConfigureJsonSerializerOptions(options);
 
         return options;
+    }
+
+    public AppConfig? Config()
+    {
+        var appConfig = configuration.GetSection(AppSettings_AppConfig).Get<AppConfig>();
+
+        return appConfig;
+    }
+
+    public AppConfig RequiredConfig()
+    {
+        var res = Config();
+
+        if (res is null) throw new Exception($"invalid null AppConfig");
+
+        return res;
+    }
+
+    public async Task<(T? obj, string? str)> ReceiveMessageAsync<T>(WebSocket webSocket, CancellationToken cancellationToken)
+    {
+        T? res = default;
+        var str = await webSocket.ReceiveStringAsync(cancellationToken);
+        if (!string.IsNullOrWhiteSpace(str))
+            res = JsonSerializer.Deserialize<T>(str, JavaSerializerSettings());
+
+        return (res, str);
+    }
+
+    public async Task<bool> SendMessageAsync<T>(T msg, WebSocket webSocket, CancellationToken cancellationToken)
+    {
+        var str = JsonSerializer.Serialize(msg, JavaSerializerSettings());
+
+        var res = await webSocket.SendStringAsync(str, cancellationToken);
+
+        return res;
     }
 
 }

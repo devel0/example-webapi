@@ -13,6 +13,8 @@ builder.Services.AddSerilog(config => { config.ReadFrom.Configuration(builder.Co
 // add custom services
 builder.Services.AddScoped<IGracefulShutdownService, GracefulShutdownService>();
 builder.Services.AddScoped<ISampleService, SampleService>();
+builder.Services.AddScoped<IUtilService, UtilService>();
+builder.Services.AddScoped<IWebSocketService, WebSocketService>();
 
 // add controllers
 builder.Services.AddControllers();
@@ -35,11 +37,14 @@ app.UseResponseCompression();
 // custommize exception handling
 app.SetupException();
 
-// Configure the HTTP request pipeline.
+// configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
     app.ConfigSwagger();
 
 app.UseHttpsRedirection();
+
+// add websocket support
+app.SetupWebSockets(cts.Token);
 
 app.UseAuthorization();
 

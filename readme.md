@@ -4,6 +4,7 @@
 - [quickstart](#quickstart)
 - [graceful shutdown](#graceful-shutdown)
 - [json camelcase](#json-camelcase)
+- [test websocket server](#test-websocket-server)
 - [seealso](#seealso)
 - [how this project was built](#how-this-project-was-built)
 
@@ -15,6 +16,7 @@ same as `dotnew new webapi` plus:
 - injectable services into controllers
 - lifetime with cts to deal with graceful shutdown
 - code casing extensions and util service for json camelcase configuration
+- websocket server
 
 ## quickstart
 
@@ -59,6 +61,25 @@ injecting `IUtilService` there is a ready to use `JavaSerializerSettings` method
 
 ```csharp
 var obj = JsonSerializer.Deserialize<Nfo>(res, util.JavaSerializerSettings());
+```
+
+## test websocket server
+
+try to paste `{"messageType":"Ping"}` to get Pong response
+
+```sh
+$ iocat ws://localhost:5000/api/ws
+> Connection to ws://localhost:5000/api/ws succeeded!
+{"msg":"test msg 2/8/2025 10:52:56\u202FPM","messageType":"SomeEvent"}
+{"msg":"test msg 2/8/2025 10:52:57\u202FPM","messageType":"SomeEvent"}
+{"msg":"test msg 2/8/2025 10:52:58\u202FPM","messageType":"SomeEvent"}
+{"messageType":"Ping"}
+> {"msg":null,"messageType":"Pong"}
+{"msg":"test msg 2/8/2025 10:52:59\u202FPM","messageType":"SomeEvent"}
+{"msg":"test msg 2/8/2025 10:53:00\u202FPM","messageType":"SomeEvent"}
+{"msg":"test msg 2/8/2025 10:53:01\u202FPM","messageType":"SomeEvent"}
+{"msg":"test msg 2/8/2025 10:53:02\u202FPM","messageType":"SomeEvent"}
+shell.on SIGINT
 ```
 
 ## seealso
