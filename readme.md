@@ -68,7 +68,7 @@ var obj = JsonSerializer.Deserialize<Nfo>(res, util.JavaSerializerSettings());
 try to paste `{"messageType":"Ping"}` to get Pong response
 
 ```sh
-$ iocat ws://localhost:5000/api/ws
+$ iocat ws://localhost:5000/api/Sample/SampleWsData
 > Connection to ws://localhost:5000/api/ws succeeded!
 {"msg":"test msg 2/8/2025 10:52:56\u202FPM","messageType":"SomeEvent"}
 {"msg":"test msg 2/8/2025 10:52:57\u202FPM","messageType":"SomeEvent"}

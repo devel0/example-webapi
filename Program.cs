@@ -9,6 +9,7 @@ builder.Configuration.SetupAppSettings(builder.Environment.EnvironmentName);
 builder.Services.AddScoped(typeof(CancellationToken), sp => cts.Token);
 builder.Services.AddResponseCompression(options => { options.EnableForHttps = true; });
 builder.Services.AddSerilog(config => { config.ReadFrom.Configuration(builder.Configuration); });
+builder.Services.AddHttpContextAccessor();
 
 // add custom services
 builder.Services.AddScoped<IGracefulShutdownService, GracefulShutdownService>();
