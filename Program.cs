@@ -17,6 +17,9 @@ builder.Services.AddScoped<ISampleService, SampleService>();
 builder.Services.AddScoped<IUtilService, UtilService>();
 builder.Services.AddScoped<IWebSocketService, WebSocketService>();
 
+// setup json serialization behaviors for http pipeline
+builder.Services.SetupJson();
+
 // add controllers
 builder.Services.AddControllers();
 
