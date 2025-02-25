@@ -13,7 +13,7 @@ public class WebSocketNfo
     /// <summary>
     /// semaphore for websocket send
     /// </summary>
-    public SemaphoreSlim SendSem { get; } = new SemaphoreSlim(1);
+    public SemaphoreSlim SendSem { get; } = new SemaphoreSlim(1, 1);
 
 }
 
