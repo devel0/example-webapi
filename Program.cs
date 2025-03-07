@@ -71,16 +71,6 @@ await app.WaitForShutdownAsync(cts.Token);
 
 var gracefulShutdown = app.Services.GetRequiredService<IGracefulShutdownService>();
 
-// app run
-try
-{
-    await app.RunAsync(cts.Token);
-}
-catch (OperationCanceledException)
-{
-    app.Logger.LogInformation("Application stopping");
-}
-
 await gracefulShutdown.HandleGracefulShutdown();
 
 app.Logger.LogInformation("Application stopped");
